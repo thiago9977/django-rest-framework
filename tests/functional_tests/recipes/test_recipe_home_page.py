@@ -14,7 +14,7 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
         body = self.browser.find_element(By.TAG_NAME, 'body')
         self.assertIn('No recipes found here 🥲', body.text)
 
-    @patch('recipes.views.PER_PAGE', new=2)
+    @patch('recipes.views.site.PER_PAGE', new=2)
     def test_recipe_search_input_can_find_correct_recipes(self):
         recipes = self.make_recipe_in_batch()
 
@@ -37,13 +37,21 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
         search_input.send_keys(title_needed)
         search_input.send_keys(Keys.ENTER)
 
+        from selenium.webdriver.support.ui import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
+    
+        wait = WebDriverWait(self.browser, 10)
+        main_content = wait.until(
+        EC.presence_of_element_located((By.CLASS_NAME, 'main-content-list'))
+        )
+
         # O usuário vê o que estava procurando na página
         self.assertIn(
             title_needed,
             self.browser.find_element(By.CLASS_NAME, 'main-content-list').text,
         )
 
-    @patch('recipes.views.PER_PAGE', new=2)
+    @patch('recipes.views.site.PER_PAGE', new=2)
     def test_recipe_home_page_pagination(self):
         self.make_recipe_in_batch()
 
