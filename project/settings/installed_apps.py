@@ -6,6 +6,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    
 
     # A gente tem apps também
     'recipes',
