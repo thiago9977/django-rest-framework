@@ -58,6 +58,6 @@ urlpatterns = [
 ]
 
 #OU ISSO
-# urlpatterns += recipe_api_v2_router.urls
+# urlpatterns += recipe_api_v2_router.urls - isto é pra quando não tem um urlpattern criado, so com a api
 
 
