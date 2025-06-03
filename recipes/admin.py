@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Category, Recipe
-
+from tag.models import Tag
 
 class CategoryAdmin(admin.ModelAdmin):
     ...
@@ -15,7 +15,7 @@ class RecipeAdmin(admin.ModelAdmin):
     list_filter = 'category', 'author', 'is_published', \
         'preparation_steps_is_html',
     list_per_page = 10
-    list_editable = 'is_published',
+    list_editable = 'is_published', 
     ordering = '-id',
     prepopulated_fields = {
         "slug": ('title',)
